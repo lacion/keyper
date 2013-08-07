@@ -10,6 +10,9 @@ import javax.ws.rs.core.MediaType;
 import co.lgmk.keyper.core.Person;
 import co.lgmk.keyper.core.Key;
 import co.lgmk.keyper.db.PersonDao;
+import co.lgmk.keyper.core.User;
+
+import com.yammer.dropwizard.auth.Auth;
 
 import com.google.inject.Inject;
 import com.google.inject.persist.UnitOfWork;
@@ -32,7 +35,7 @@ public class PersonResource {
     }
 
     @POST
-    public Person createPerson(Person person)
+    public Person createPerson(@Auth User user, Person person)
     {
         KeyRepository.getTransaction().begin();
         Person p = new Person();
@@ -48,7 +51,7 @@ public class PersonResource {
 
     @Path("/key/{personId}")
     @POST
-    public Person createKey(@PathParam("personId") Integer personId, Key key)
+    public Person createKey(@Auth User user, @PathParam("personId") Integer personId, Key key)
     {
         KeyRepository.getTransaction().begin();
         Person p = KeyRepository.findById(personId);
@@ -62,7 +65,7 @@ public class PersonResource {
 
     @GET
     @Path("/list")
-    public List<Person> list()
+    public List<Person> list(@Auth User user)
     {
         List<Person> ret = null;
         KeyRepository.getTransaction().begin();

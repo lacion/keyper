@@ -1,12 +1,16 @@
 package co.lgmk.keyper;
 
 import co.lgmk.keyper.resources.PersonResource;
+import co.lgmk.keyper.auth.BasicAuthenticator;
+import co.lgmk.keyper.core.User;
+
 import com.google.inject.persist.PersistService;
 import com.google.inject.persist.jpa.JpaPersistModule;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
+import com.yammer.dropwizard.auth.basic.BasicAuthProvider;
 
 public class KeyperService extends Service<KeyperConfiguration> {
 
@@ -33,11 +37,14 @@ public class KeyperService extends Service<KeyperConfiguration> {
 
 
     @Override
-    public void run(KeyperConfiguration config, Environment environment)
-            throws Exception {
+    public void run(KeyperConfiguration config, Environment environment) throws Exception
+    {
 
         PersistService persistService = guiceBundle.getInjector().getInstance(PersistService.class);
         persistService.start();
+
+        environment.addProvider(new BasicAuthProvider<User>(new BasicAuthenticator(),
+                "SUPER SECRET STUFF"));
 
         environment.addResource(guiceBundle.getInjector().getInstance(PersonResource.class));
     }
