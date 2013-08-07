@@ -25,6 +25,7 @@ public class Person extends Base {
 
     public String firstName;
     public String lastName;
+    public String userName;
     public String jobTitle;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch=FetchType.EAGER)
@@ -59,6 +60,13 @@ public class Person extends Base {
         this.jobTitle = jobTitle;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public Set<Key> getKeyList() {
         return keyList;
