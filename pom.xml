@@ -7,7 +7,7 @@
 
     <groupId>co.lgmk.keyper</groupId>
     <artifactId>keyper</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
 
     <name>Keyper</name>
     <description>Key Management Service</description>
