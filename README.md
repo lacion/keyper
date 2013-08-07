@@ -19,4 +19,4 @@ this behavior can be changed in persistence.xml file
 
 * To run the server and create the DB.
 
-        java -jar target/keyper-0.0.1-SNAPSHOT.jar server example.yml
+        java -jar target/keyper-0.0.1.jar server example.yml
