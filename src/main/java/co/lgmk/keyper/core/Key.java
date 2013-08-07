@@ -8,7 +8,6 @@ public class Key extends Base {
 
     private String name;
     private String key;
-    private boolean main;
 
     public Key() {
     }
@@ -37,16 +36,6 @@ public class Key extends Base {
     public void setKey(String key)
     {
         this.key = key;
-    }
-
-    public boolean getMain()
-    {
-        return main;
-    }
-
-    public void setMain(boolean main)
-    {
-        this.main = main;
     }
 
 }

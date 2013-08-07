@@ -63,15 +63,4 @@ public class Person extends Base {
     public Set<Key> getKeyList() {
         return keyList;
     }
-
-    public String getMainKey() {
-        String ret = "[missing key for person with id " + getId() + "!]";
-        Collection<Key> list = getKeyList();
-        if (list!=null && !list.isEmpty()) {
-            ret =
-//					"mt: " +
-                    ((Key)list.toArray()[0]).getName();
-        }
-        return ret;
-    }
 }

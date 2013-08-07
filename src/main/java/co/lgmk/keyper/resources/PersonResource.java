@@ -34,6 +34,10 @@ public class PersonResource {
         this.KeyRepository = KeyRepository;
     }
 
+    /*
+     * Creates a person resource, a person is the basic holder of keys and can hold
+     * several keys
+     */
     @POST
     public Person createPerson(@Auth User user, Person person)
     {
@@ -49,6 +53,9 @@ public class PersonResource {
         return p;
     }
 
+    /*
+     * Creates a key resource and adds them to a person
+     */
     @Path("/key/{personId}")
     @POST
     public Person createKey(@Auth User user, @PathParam("personId") Integer personId, Key key)
@@ -63,13 +70,30 @@ public class PersonResource {
         return p;
     }
 
+    /*
+     * Lists all persons and their keys
+     */
     @GET
     @Path("/list")
-    public List<Person> list(@Auth User user)
+    public List<Person> listAll(@Auth User user)
     {
         List<Person> ret = null;
         KeyRepository.getTransaction().begin();
         ret = KeyRepository.findAll();
+        KeyRepository.getTransaction().commit();
+        return ret;
+    }
+
+    /*
+     * List a person and its keys
+     */
+    @GET
+    @Path("/{personId}")
+    public Person list(@Auth User user, @PathParam("personId") Integer personId)
+    {
+        Person ret = null;
+        KeyRepository.getTransaction().begin();
+        ret = KeyRepository.findById(personId);
         KeyRepository.getTransaction().commit();
         return ret;
     }
