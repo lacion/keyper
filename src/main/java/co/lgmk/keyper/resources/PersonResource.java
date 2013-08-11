@@ -47,6 +47,7 @@ public class PersonResource {
         p.setFirstName(person.getFirstName());
         p.setLastName(person.getLastName());
         p.setJobTitle(person.getJobTitle());
+        p.setUserName(person.getUserName());
 
         KeyRepository.save(p);
         KeyRepository.getTransaction().commit();
