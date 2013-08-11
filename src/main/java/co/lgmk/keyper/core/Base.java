@@ -28,10 +28,6 @@ public abstract class Base implements Serializable
     @Column(name = "id", updatable = false, nullable = false)
     private Long id = null;
 
-    @Version
-    @Column(name = "version")
-    private int version = 0;
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "veraenderung_zeitpunkt")
     @Transient
@@ -40,7 +36,6 @@ public abstract class Base implements Serializable
     protected void copy(final Base source)
     {
         this.id = source.id;
-        this.version = source.version;
         this.lastUpdate = source.lastUpdate;
     }
 
@@ -79,17 +74,6 @@ public abstract class Base implements Serializable
     public void setId(final Long id)
     {
         this.id = id;
-    }
-
-    public int getVersion()
-    {
-        return this.version;
-    }
-
-    @SuppressWarnings("unused")
-    private void setVersion(final int version)
-    {
-        this.version = version;
     }
 
     public Date getLastUpdate()
